@@ -1,0 +1,29 @@
+apiVersion: v1
+baseDomain: redhat.com
+metadata:
+  name: test
+controlPlane:
+  architecture: s390x
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineCIDR: 192.168.126.0/24
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+compute:
+- architecture: ppc64le
+  hyperthreading: Enabled
+  name: worker
+  replicas: 3
+platform:
+  libvirt:
+    network:
+      if: "br0"
+pullSecret: <pull secret from try.openshift.com>
+sshKey: |
+  ssh-rsa <key create from id_rsa.pub>
